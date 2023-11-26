@@ -1,0 +1,3 @@
+#!/bin/sh
+gcc -O3 -march=native -mtune=native -Wall -Wextra -Wno-unused-function -Wno-unused-parameter -Wno-sign-compare -I. -Isubroutines -DKAT -DKATNUM=`cat KATNUM` "-DCRYPTO_NAMESPACE(x)=x" "-D_CRYPTO_NAMESPACE(x)=_##x" -o kat nist/kat_kem.c  benes.c bm.c  decrypt.c gf.c  root.c  synd.c transpose.c util.c     -lkeccak -lcrypto -ldl 
+
