@@ -1,4 +1,1 @@
-INPUT PARAMETERS
-SecretKey(sk): 
-CipherText(ct1): m = 12, t = 64, mt/8 bytes = 96 bytes
-decrypt(e,SecretKey,CipherText) -> 
+run : make
