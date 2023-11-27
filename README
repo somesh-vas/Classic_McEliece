@@ -1,1 +1,5 @@
 run : make
+
+open kat_kem.int
+
+katnum range : 1 to 3000
