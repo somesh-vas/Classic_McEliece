@@ -126,7 +126,7 @@ main()
             count ++;
         }
         #ifdef KAT
-        {   
+        {  printf("comparing error positions");
             for(int i = 0; i < 64; i++){
                 printf("%d ",flag[i]);
             }
@@ -136,15 +136,15 @@ main()
 
 #ifdef KAT
   {
-//   int k; //sum = 0;
-// // printf("decrypt e: positions");
-// for (k = 0; k < SYS_N; ++k) {
-//     if (e[k / 8] & (1 << (k & 7))) {
-//         printf(" %d", k);
-//         //sum += k;
-//     }
-// }
-// printf("\n");
+  int k; //sum = 0;
+printf("decrypt e: positions");
+for (k = 0; k < SYS_N; ++k) {
+    if (e[k / 8] & (1 << (k & 7))) {
+        printf(" %d", k);
+        //sum += k;
+    }
+}
+printf("\n");
 
 // printf("Sum of positions: %d\n", sum);
 
