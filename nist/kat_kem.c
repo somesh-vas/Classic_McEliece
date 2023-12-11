@@ -107,7 +107,15 @@ main()
              
         unsigned char e[ SYS_N / 8];
         // sk1 + 40 skips the random string s bits
-
+        #ifdef KAT
+        {
+            printf("Values from sk to sk + 40:\n");
+    for (int i = 0; i < 41; i++) {
+        printf("%02X ", sk1[i]);
+    }
+    printf("\n");
+        }
+        #endif
         decrypt(e, sk1 + 40, ct1);
         int k;
         int count = 0;
@@ -126,25 +134,26 @@ main()
             count ++;
         }
         #ifdef KAT
-        {  printf("comparing error positions");
-            for(int i = 0; i < 64; i++){
-                printf("%d ",flag[i]);
-            }
-            printf("\n");
+        {  
+            // printf("comparing error positions");
+        //     for(int i = 0; i < 64; i++){
+        //         printf("%d ",flag[i]);
+        //     }
+        //     printf("\n");
         }
         #endif
 
 #ifdef KAT
   {
-  int k; //sum = 0;
-printf("decrypt e: positions");
-for (k = 0; k < SYS_N; ++k) {
-    if (e[k / 8] & (1 << (k & 7))) {
-        printf(" %d", k);
-        //sum += k;
-    }
-}
-printf("\n");
+//   int k; //sum = 0;
+// printf("decrypt e: positions");
+// for (k = 0; k < SYS_N; ++k) {
+//     if (e[k / 8] & (1 << (k & 7))) {
+//         printf(" %d", k);
+//         //sum += k;
+//     }
+// }
+// printf("\n");
 
 // printf("Sum of positions: %d\n", sum);
 

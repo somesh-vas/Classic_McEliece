@@ -5,6 +5,7 @@
 #include "util.h"
 
 #include "params.h"
+#include <stdio.h>
 
 void store_gf(unsigned char *dest, gf a)
 {
@@ -13,14 +14,18 @@ void store_gf(unsigned char *dest, gf a)
 }
 
 uint16_t load_gf(const unsigned char *src)
-{
-	uint16_t a;
+{	
+	
+	uint16_t a; // 2 byte 
 
-	a = src[1];
-	a <<= 8;
-	a |= src[0];
+	a = src[1]; 
+	a <<= 8; // Left-shift by 8 bits (one byte)
+	a |= src[0]; 
 
-	return a & GFMASK;
+	return a & GFMASK; 
+	/*
+	GFMASK is defined as 4095, which has 12 bits set to 1), and it discards any higher-order bits in a beyond the 12th bit
+	*/
 }
 
 uint32_t load4(const unsigned char * in)

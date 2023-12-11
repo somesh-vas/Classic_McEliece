@@ -35,7 +35,10 @@ int decrypt(unsigned char *e, const unsigned char *sk, const unsigned char *c)
 	for (i = 0; i < SYND_BYTES; i++)       r[i] = c[i]; // appending c0 to r
 
 	for (i = SYND_BYTES; i < SYS_N/8; i++) r[i] = 0; // appending 2720 zeroes
-	
+	// sk values for loading g
+	//F7066E0E5103160E7600FE0E0300C00F670A1A039A027B0B33074D0281094F0CDD0BD40D9A0090012909AD043803B0009
+	//400C30FDB01F40468059F097E08A20F8F06B00DD408F80761006C0838058A0F5B00940F3A0A8105C502E40DDF0D68008E
+	//0DBA0D55089C06E5094908E105B6072C099904E701980F6C0AA50D9006510D
 	for (i = 0; i < SYS_T; i++) { g[i] = load_gf(sk); sk += 2; } g[ SYS_T ] = 1; // load goppa polynomial from sk to g[] // 'load_gf' is utility function from util.c
 	
 	
