@@ -25,6 +25,13 @@ uint16_t load_gf(const unsigned char *src)
 	return a & GFMASK; 
 	/*
 	GFMASK is defined as 4095, which has 12 bits set to 1), and it discards any higher-order bits in a beyond the 12th bit
+	ex:
+	a        : 0000 0110 1111 0111
+	GFMASK   : 0000 1111 1111 1111
+	-------------------------------
+	result   : 0000 0110 1111 0111
+
+		
 	*/
 }
 
@@ -58,23 +65,27 @@ uint64_t load8(const unsigned char * in)
 {
 	int i;
 	uint64_t ret = in[7];
-
+	
 	for (i = 6; i >= 0; i--)
 	{
 		ret <<= 8;
 		ret |= in[i];
 	}
-
+	/*	Initially, ret is set to the last byte (in[7]), which is 0x08.
+		In the loop, the code shifts ret left by 8 bits in each iteration 
+		and then performs a bitwise OR with the current byte (in[i]). 
+		This process effectively combines the bytes to form the 64-bit integer.
+	*/
 	return ret;
 }
 
 gf bitrev(gf a)
 {
-	a = ((a & 0x00FF) << 8) | ((a & 0xFF00) >> 8);
-	a = ((a & 0x0F0F) << 4) | ((a & 0xF0F0) >> 4);
-	a = ((a & 0x3333) << 2) | ((a & 0xCCCC) >> 2);
-	a = ((a & 0x5555) << 1) | ((a & 0xAAAA) >> 1);
+	a = ((a & 0x00FF) << 8) | ((a & 0xFF00) >> 8); // Swap Adjacent Bytes:
+	a = ((a & 0x0F0F) << 4) | ((a & 0xF0F0) >> 4); // Swap Nibbles within Bytes:
+	a = ((a & 0x3333) << 2) | ((a & 0xCCCC) >> 2); // Swap Pairs of Bits within Nibbles:
+	a = ((a & 0x5555) << 1) | ((a & 0xAAAA) >> 1); // Swap Individual Bits within Pairs:
 	
-	return a >> 4;
+	return a >> 4; // Right Shift by 4 to Discard Lower 4 Bits:
 }
 

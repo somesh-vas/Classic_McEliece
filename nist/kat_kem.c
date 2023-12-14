@@ -133,15 +133,15 @@ main()
             }
             count ++;
         }
-        #ifdef KAT
-        {  
-            // printf("comparing error positions");
-        //     for(int i = 0; i < 64; i++){
-        //         printf("%d ",flag[i]);
-        //     }
-        //     printf("\n");
-        }
-        #endif
+        // #ifdef KAT
+        // {  
+        //     // printf("comparing error positions");
+        // //     for(int i = 0; i < 64; i++){
+        // //         printf("%d ",flag[i]);
+        // //     }
+        // //     printf("\n");
+        // }
+        // #endif
 
 #ifdef KAT
   {

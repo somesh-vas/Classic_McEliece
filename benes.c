@@ -111,9 +111,9 @@ void apply_benes(unsigned char * r, const unsigned char * bits, int rev)
 
 /* input: condition bits c */
 /* output: support s */
-void support_gen(gf * s, const unsigned char *c)
+void support_gen(gf * s, const unsigned char *c) // typedef uint16_t gf 2 bytes
 {
-	gf a;
+	gf a; //  uint16_t a
 	int i, j;
 	unsigned char L[ GFBITS ][ (1 << GFBITS)/8 ];
 
@@ -121,13 +121,26 @@ void support_gen(gf * s, const unsigned char *c)
 		for (j = 0; j < (1 << GFBITS)/8; j++)
 			L[i][j] = 0;
 
-	for (i = 0; i < (1 << GFBITS); i++)
+	for (i = 0; i < (1 << GFBITS); i++) // O TO 4096
 	{
-		a = bitrev((gf) i);
+		a = bitrev((gf) i); 
+/*
+example:
+a: 0, bitrev(a): 0
+a: 1, bitrev(a): 2048
+a: 2, bitrev(a): 1024
+a: 3, bitrev(a): 3072
+a: 4, bitrev(a): 512
+a: 5, bitrev(a): 2560
+a: 6, bitrev(a): 1536
+a: 7, bitrev(a): 3584
+a: 8, bitrev(a): 256
+*/
 
-		for (j = 0; j < GFBITS; j++)
+		for (j = 0; j < GFBITS; j++) // 0 to 12
 			L[j][ i/8 ] |= ((a >> j) & 1) << (i%8);
 	}
+
 			
 	for (j = 0; j < GFBITS; j++)
 		apply_benes(L[j], c, 0);
